@@ -15,7 +15,7 @@ namespace RegistrationService
         static void Main(string[] args)
         {
             //Initialize Data
-           // SeedData();
+           SeedData();
             ApplicationStartWindow();
         }
         static void SeedData()
@@ -24,10 +24,10 @@ namespace RegistrationService
             passwords[0] = "salam123";
 
             nicknames[1] = "Turan";
-            passwords[1] = "salam123";
+            passwords[1] = "salam1234";
 
             nicknames[2] = "Razor";
-            passwords[2] = "salam123";
+            passwords[2] = "salam1235";
         }
         static void ApplicationStartWindow()
         {
@@ -62,22 +62,23 @@ namespace RegistrationService
             Console.ResetColor();
             Console.WriteLine("Enter Your Nickname: ");
             string nickName = Console.ReadLine();
-            while (FindNickName(nickName) == false)
+           
+            Console.WriteLine("Enter Your Password: ");
+            string password = Console.ReadLine();
+            while (FindUser(nickName,password) == false)
             {
                 Console.BackgroundColor = ConsoleColor.Red;
-                Console.WriteLine("This NickName is't exists. Please Enter new NickName: ");
+                Console.WriteLine("This User is't exists. Please Enter new User: ");
                 Console.ResetColor();
                 nickName = Console.ReadLine();
             }
-            Console.WriteLine("Enter Your Password: ");
-            string password = Console.ReadLine();
-            while (FindPassword(password) == false)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.WriteLine("Password is invalid.");
-                Console.ResetColor();
-                password = Console.ReadLine();
-            }
+            //while (FindPassword(password) == false)
+            //{
+            //    Console.BackgroundColor = ConsoleColor.Red;
+            //    Console.WriteLine("Password is invalid.");
+            //    Console.ResetColor();
+            //    password = Console.ReadLine();
+            //}
             Console.BackgroundColor = ConsoleColor.Green;
             Console.WriteLine("Xosh gelmisiniz");
             Console.ResetColor();
@@ -94,11 +95,20 @@ namespace RegistrationService
             }
             return false;
         }
-        private static bool FindNickName(string nickName)
+        private static bool FindUser(string nickName,string password)
         {
+            int index = 0;
             foreach (var nickname in nicknames)
             {
                 if(nickname == nickName)
+                {
+                    break;
+                }
+                index++;
+            }
+            for (int i = 0; i < passwords.Length; i++)
+            {
+                if (passwords[index] == password)
                 {
                     return true;
                 }
